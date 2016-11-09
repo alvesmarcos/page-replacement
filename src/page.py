@@ -111,14 +111,3 @@ def otm(vector):
 				frames[frames.index(key)] = v
 			count += 1
 	print("OTM", count)
-
-# tests 
-l = [4,1,2,3,4,1,2,5,1,2,3,4,5] 
-l1 = [3,7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1]
-
-fifo(list(l))
-otm(list(l))
-lru(list(l))
-fifo(list(l1))
-otm(list(l1))
-lru(list(l1))

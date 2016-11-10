@@ -27,45 +27,27 @@ def fifo(vector):
 
 # Least Recently Used 
 def lru(vector):
-	# salvando ultima pagina inserida
-	last_page = 0
 	# indice do quadro
-	index = 0
-	# inicializando o quadro com valores default (-1)
-	frames = [-1 for x in range(vector[0])]
+	size_max = vector.pop(0)
+	frames = []
+
 	# retiro do vetor o número de quadros
-	vector.pop(0)
-	# tabela com contadores das páginas
-	table = {}
-	# contador para troca de pagina
 	count = 0
-
 	for v in vector:
-		# checando se a página não tem contador
-		if not v in table:
-			table[v] = 1
-		else:
-			# incremento contador da página
-			table[v] += 1 
-
 		# checando se a página está fora do quadro
 		if not v in frames:
 			# caso tenha espaço no quadro
-			if len(frames) != index:
+			if len(frames) != size_max:
 				# troca
-				frames[index] = v 
-				index += 1
+				frames.insert(0, v) 
 			else:
-				# verificando qual página tem o menor contador
-				key, less = frames[0], table[frames[0]]
-				for i in range(len(frames)):
-					if less > table[frames[i]] and frames[i] != last_page:
-						key, less = frames[i], table[frames[i]]
-				# troca
-				frames[frames.index(key)] = v
+				frames.pop()
+				frames.insert(0, v)
 			count += 1
-			# salvando registro da última página
-			last_page = v
+		else:
+			key = frames.index(v)
+			frames.pop(key)
+			frames.insert(0, v)
 	print("LRU", count)
 
 # Great Algorithm	
